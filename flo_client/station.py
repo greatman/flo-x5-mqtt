@@ -56,7 +56,8 @@ class Station:
             if len(homestation_sessions) > 0:
                 session = homestation_sessions[0]
                 self.session_duration.set_state(session["duration"])
-                self.session_start_time.set_state(session["startDateTime"])
+                start_date = datetime.fromisoformat(session["startDateTime"])
+                self.session_start_time.set_state(start_date.timestamp())
                 if session["status"] == "NotCharging" or session["status"] == "Completed":
                     self.vehicle_charging_sensor.off()
                     self.amperage_charging_sensor.set_state(0)
@@ -78,7 +79,9 @@ class Station:
             self.vehicle_charging_sensor.off()
             self.amperage_charging_sensor.set_state(0)
             self.amperage_offered_sensor.set_state(0)
+            self.energy_transferred_sensor.set_state(0)
             self.voltage_sensor.set_state(0)
+            self.session_start_time.set_state(0)
 
 
 
@@ -246,7 +249,7 @@ class Station:
         session_start_time_info = SensorInfo(
             name="Session Start Time",
             state_class=None,
-            device_class="date",
+            device_class="timestamp",
             unique_id="session_start_time",
             device=self.device_info
         )
