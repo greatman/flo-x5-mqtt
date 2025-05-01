@@ -1,0 +1,39 @@
+[
+    {
+        "uid": "2919616b-5f26-4f49-a764-b877183257f5",
+        "partyId": "",
+        "startDateTime": "2025-04-29T01:16:03.406+00:00",
+        "endDateTime": "0001-01-01T00:00:00.000+00:00",
+        "duration": 9767,
+        "kwh": 0,
+        "evseUid": "1",
+        "connectorId": "1",
+        "status": "NotCharging",
+        "current": 0,
+        "currentOffered": 48,
+        "voltage": 244,
+        "lastUpdated": "2025-04-29T03:58:51.328+00:00",
+        "sessionStationModel": {
+            "chargingStationUid": "d2bafd6c-0eb5-480b-95e7-26949e9794fe",
+            "physicalReference": "H108J22",
+            "nickname": "Maison",
+            "model": "FLO Home X3",
+            "modelType": "X3",
+            "postalCode": "PERSONAL",
+            "timezone": "America/Toronto"
+        },
+        "energyCost": {
+            "flatRate": 0.07800,
+            "tariffType": "RegionalFlat",
+            "cost": 0.00006
+        },
+        "restrictions": {
+            "appliedRestrictions": [
+                "PowerRestrictionSchedule"
+            ],
+            "activeRestriction": "PowerRestrictionSchedule",
+            "optOutRestrictions": [],
+            "powerSharingMode": "None"
+        }
+    }
+]

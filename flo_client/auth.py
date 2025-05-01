@@ -192,6 +192,6 @@ class Auth:
         )
 
         # Save the access_token in json format in a file named refresh.json
-        with open("./" + DATA_FOLDER + "/refresh.json", "w") as f:
+        with open("" + DATA_FOLDER + "/refresh.json", "w") as f:
             refresh_token_file_content = {"refresh_token": resp_dict["refresh_token"]}
             json.dump(refresh_token_file_content, f, indent=4)

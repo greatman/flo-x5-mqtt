@@ -6,7 +6,7 @@ DATA_FOLDER = "data"
 
 # Base URL for API requests.
 BASE_URL = "https://emobility.flo.ca"
-STATIONS_URL = BASE_URL + "/v3.0/user/stations"
+STATIONS_URL = BASE_URL + "/v3.1/homestation"
 SESSIONS_URL = BASE_URL + "/v3.0/user/sessions"
 
 # Identity provider information and URLs

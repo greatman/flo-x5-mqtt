@@ -10,7 +10,7 @@ if __name__ == "__main__":
     # Get username and password from command line
     username = os.environ.get("FLO_USERNAME")
     password = os.environ.get("FLO_PASSWORD")
-    station_name = os.environ.get("FLO_STATION_NAME")
+    station_name = "Maison"
     hass_mqtt_host = os.environ.get("HASS_MQTT_HOST")
     hass_mqtt_port = os.environ.get("HASS_MQTT_PORT")
     hass_mqtt_username = os.environ.get("HASS_MQTT_USERNAME")

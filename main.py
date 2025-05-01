@@ -4,8 +4,12 @@ import os
 import time
 import logging
 
+from ha_mqtt_discoverable import Settings
+
+from flo_client.client import FloX5Client
 from flo_client.device import FloX5Device
 from flo_client.consts import *
+from flo_client.station import Station
 
 logger = logging.getLogger(__name__)
 
@@ -34,7 +38,7 @@ if __name__ == "__main__":
     configure_logging(log_level)
 
     # Check if data folder exists
-    if not os.path.exists("./" + DATA_FOLDER):
+    if not os.path.exists(DATA_FOLDER):
         raise Exception(
             "Data folder not found: '"
             + DATA_FOLDER
@@ -53,27 +57,27 @@ if __name__ == "__main__":
     if not hass_mqtt_port:
         raise Exception("HASS_MQTT_PORT environment variable not set.")
 
-    logger.info("Starting flo X5 to MQTT...")
+    logger.info("Starting flo to MQTT...")
     try:
         # Create the client
-        device = FloX5Device(
-            username,
-            password,
-            station_name,
-            hass_mqtt_host,
-            hass_mqtt_port,
-            hass_mqtt_username,
-            hass_mqtt_password,
+        client = FloX5Client(username, password)
+        # Configure the required parameters for the MQTT broker
+        mqtt_settings = Settings.MQTT(
+            host=hass_mqtt_host,
+            port=int(hass_mqtt_port),
+            username=hass_mqtt_username,
+            password=hass_mqtt_password,
         )
-
-        # Update the status every minute
-        while True:
-            try:
-                device.update_all_sensors()
-            except Exception as e:
-                logger.error("Error updating sensors: ", e)
-
-            logger.info("Sleeping for " + str(REFRESH_DELAY_SECS) + " seconds...")
-            time.sleep(REFRESH_DELAY_SECS)
+        station_json = client.get_station_by_name(name=station_name)
+        if station_json:
+            station = Station(station_uid=station_json["chargingStationUid"], client=client, mqtt_settings=mqtt_settings)
+            while True:
+                try:
+                    station.refresh()
+                except Exception as e:
+                    logger.error("Error updating sensors: ", e)
+                time.sleep(REFRESH_DELAY_SECS)
+        else:
+            raise Exception(f"Station {station_name} not found")
     except Exception as e:
         logger.error("Error: ", e)

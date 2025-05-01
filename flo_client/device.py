@@ -61,10 +61,10 @@ class FloX5Device:
 
         # Define the device. At least one of `identifiers` or `connections` must be supplied
         self.device_info = DeviceInfo(
-            name="Flo X5: " + station["information"]["name"],
-            model=station["information"]["model"],
+            name=f"Flo {station["modelType"]}: {station["stationPreferences"]["nickname"]}",
+            model=station["model"],
             manufacturer="AddEnergie",
-            identifiers=station["information"]["id"],
+            identifiers=station["chargingStationUid"],
         )
 
     def _initialize_sensors(self) -> None:
