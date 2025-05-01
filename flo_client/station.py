@@ -165,7 +165,7 @@ class Station:
         amperage_supported_by_charger_info = SensorInfo(
             name="Amperage supported by charger",
             unit_of_measurement="A",
-            state_class="measurement",
+            state_class=None,
             device_class="current",
             unique_id="amperage_supported_by_charger",
             device=self.device_info,
@@ -197,7 +197,7 @@ class Station:
         voltage_sensor_info = SensorInfo(
             name="Voltage",
             unit_of_measurement="V",
-            state_class="measurement",
+            state_class=None,
             device_class="voltage",
             unique_id="voltage",
             device=self.device_info,
@@ -245,8 +245,9 @@ class Station:
         # Session Start Time sensor
         session_start_time_info = SensorInfo(
             name="Session Start Time",
+            state_class=None,
             device_class="date",
-            unique_id="session_duration",
+            unique_id="session_start_time",
             device=self.device_info
         )
 
